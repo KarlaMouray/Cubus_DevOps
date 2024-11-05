@@ -1,0 +1,12 @@
+global:
+  scrape_interval: 15s  # Intervalo global para coleta de métricas
+  evaluation_interval: 15s  # Avaliação de regras de alerta
+
+scrape_configs:
+  - job_name: 'backend'
+    metrics_path: '/metrics'  # Caminho para métricas
+    scrape_interval: 15s  # Intervalo específico para o backend
+    static_configs:
+      - targets: ['backend:5000']  # Atualizado para a porta correta
+        labels:
+          service: 'backend'

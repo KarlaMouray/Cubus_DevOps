@@ -1,0 +1,5 @@
+# Node.js
+/backend/node_modules/            # Diretório de dependências do Node.js
+/backend/package-lock.json         # Arquivo de bloqueio de dependências
+/backend/.env                      # Variáveis de ambiente
+/backend/dist/                     # Diretório de distribuição (se aplicável)

@@ -1,0 +1,41 @@
+services:
+  banco:
+    image: postgres
+    environment:
+      POSTGRES_USER: seu_usuario
+      POSTGRES_PASSWORD: sua_senha
+      POSTGRES_DB: seu_banco
+    ports:
+      - "5432:5432"
+    networks: 
+      - app-network
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      POSTGRES_USER: seu_usuario
+      DB_HOST: banco
+      POSTGRES_DB: seu_banco
+      POSTGRES_PASSWORD: sua_senha
+      BACKEND_URL: http://backend:3001
+    depends_on:
+      - banco
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      BACKEND_URL: http://backend:3001
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
